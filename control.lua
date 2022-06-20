@@ -9,7 +9,8 @@ global.itemValidCache = {}
 global.ignoreEventFlag = false
 
 local function CreatePlayerData(playerIndex)
-	playerData = global.playerData
+	global.playerData = global.playerData or {}
+	local playerData = global.playerData
 	--Initialize data stored about the player
 	if playerData[playerIndex] == nil then
 		playerData[playerIndex] = {
@@ -240,6 +241,7 @@ local function IsPlaceableItem(prototype)
 end
 
 local function CheckInventory(player, inventory, buttonData, handSlot)
+	global.itemValidCache = global.itemValidCache or {}
 	local itemValidCache = global.itemValidCache
 	local playerStack = nil
 	local itemsInserted = false
